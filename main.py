@@ -36,15 +36,23 @@ def player_vs_cpu():
     while True:
         cards = ["Face", 2, 3, 4, 5, 6, 7, 8, 9, 10]
         def hit(player_count):
-            random_index = random.randint(0, len(cards) - 1)
-            random_card = cards[random_index]
-            print("You drew the following card:", random_card)
-            if random_card == "Face" and player_count < 11:
-                random_card = 11
-            elif random_card == "Face" and player_count > 11:
-                random_card = 1
-            player_count += random_card
-            print("Your total so far is:", player_count)
+            while True:
+                random_index = random.randint(0, len(cards) - 1)
+                random_card = cards[random_index]
+                print("You drew the following card:", random_card)
+                if random_card == "Face" and player_count < 11:
+                    random_card = 11
+                elif random_card == "Face" and player_count > 11:
+                    random_card = 1
+                player_count += random_card
+                print("Your total so far is:", player_count)
+                if player_count < 21:
+                    next_choice = input("""Type "Hit" if you want to continue your turn or "Stand" to pass: """)
+                    if next_choice.title() == "Hit":
+                        hit(player_count)
+                        break
+                    elif next_choice.title() == "Stand":
+                        pass
 
         users_two_cards = input("Press enter to draw your first two cards: ")
         if users_two_cards == "":
