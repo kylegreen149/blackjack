@@ -8,7 +8,7 @@ Here are the rules:
 - The game starts with the first player drawing two cards. Based on the card's value, you can
     - "Hit": Saying "Hit" means that you want to draw another card to try to get closer to 21
     - "Stand": Saying "Stand" means that you are satisfyed with where you are, and you feel you have got close to 21 as best as you could.
-The catch: Once you stay "Stand" your turn is over. It is then the next players turn, if they get closer to 21 than you do, then you lose.
+The catch: Once you say "Stand", your turn is over. It is then the next players turn, if they get closer to 21 than you do, then you lose.
 However, if you get above 21, or the player after you goes above 21, then that player loses.
     - If you draw a face card before your total count is 11, the face card's value is equal to 11. 
       If your total is already 11 or higher, the face card's value only equals 1.
@@ -35,8 +35,18 @@ def player_vs_cpu():
 
     while True:
         cards = ["Face", 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        def hit(player_count):
+            random_index = random.randint(0, len(cards) - 1)
+            random_card = cards[random_index]
+            print("You drew the following card:", random_card)
+            if random_card == "Face" and player_count < 11:
+                random_card = 11
+            elif random_card == "Face" and player_count > 11:
+                random_card = 1
+            player_count += random_card
+            print("Your total so far is:", player_count)
 
-        users_two_cards = input("Press enter you draw your first two cards")
+        users_two_cards = input("Press enter to draw your first two cards: ")
         if users_two_cards == "":
             random_index = random.randint(0, len(cards) - 1) # Draws first card
             random_index2 = random.randint(0, len(cards) - 1) # Draws second card
@@ -52,11 +62,12 @@ def player_vs_cpu():
             print("You drew the following cards:", random_card, random_card2)
             player_count = random_card + random_card2
             print("Your total so far is:", player_count)
-            next_choice = input("Would you like to Hit or Stand? ")
-            # if next_choice.title() == "Hit":
-            #     pass
-            # elif next_choice.title() == "Stand":
-            #     pass
+            if player_count < 21:
+                next_choice = input("""Type "Hit" if you want to continue your turn or "Stand" to pass: """)
+                if next_choice.title() == "Hit":
+                    hit(player_count)
+                elif next_choice.title() == "Stand":
+                    pass
         
 
 def player_vs_player():
