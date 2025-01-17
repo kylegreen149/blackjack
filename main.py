@@ -42,10 +42,22 @@ def player_vs_cpu():
             random_index2 = random.randint(0, len(cards) - 1) # Draws second card
             random_card = cards[random_index] # Returns first card
             random_card2 = cards[random_index2] # Returns second card
+            if random_card == "Face" and player_count < 11:
+                random_card = 11
+            elif random_card2 == "Face" and player_count < 11:
+                random_card2 = 11
+            elif random_card2 == "Face" and player_count > 11:
+                random_card2 = 1
+
             print("You drew the following cards:", random_card, random_card2)
             player_count = random_card + random_card2
-            print("Your total is: ", player_count)
-        break
+            print("Your total so far is:", player_count)
+            next_choice = input("Would you like to Hit or Stand? ")
+            # if next_choice.title() == "Hit":
+            #     pass
+            # elif next_choice.title() == "Stand":
+            #     pass
+        
 
 def player_vs_player():
     pass
