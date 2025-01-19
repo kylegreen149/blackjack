@@ -18,6 +18,7 @@ Choose a number that corresponds with your game mode choice:
     3) Exit Program
 Enter choice here: """))
         if prompt == 1:
+            current_game_mode = player_vs_cpu
             player_vs_cpu()
         elif prompt == 2:
             player_vs_player()
@@ -29,7 +30,7 @@ Enter choice here: """))
             print("Only enter a number from 1-3")
             print("")
 
-def hit(player_count):
+def hit(player_count, current_game_mode):
     cards = ["Face", 2, 3, 4, 5, 6, 7, 8, 9, 10]
     while True:
         random_index = random.randint(0, len(cards) - 1)
@@ -46,7 +47,7 @@ def hit(player_count):
         elif player_count < 21:
             next_choice = input("""Type "Hit" if you want to continue your turn or "Stand" to pass: """)
             if next_choice.title() == "Hit":
-                hit(player_count)
+                hit(player_count, current_game_mode)
                 break
             elif next_choice.title() == "Stand":
                 pass
@@ -56,7 +57,7 @@ def hit(player_count):
     while True:
         rematach = input("Would you like to have a rematch? Type 'y' for yes, or 'n' for no... ")
         if rematach.title() == "Y":
-            pass
+            current_game_mode()
         else:
             print("")
             print("Returning to main menu...")
@@ -71,7 +72,7 @@ def player_vs_cpu():
         cards = ["Face", 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
         users_two_cards = input("Press enter to draw your first two cards: ")
-        if users_two_cards == "":
+        if len(users_two_cards) >= 0:
             random_index = random.randint(0, len(cards) - 1) # Draws first card
             random_index2 = random.randint(0, len(cards) - 1) # Draws second card
             random_card = cards[random_index] # Returns first card
@@ -89,7 +90,7 @@ def player_vs_cpu():
             if player_count < 21:
                 next_choice = input("""Type "Hit" if you want to continue your turn or "Stand" to pass: """)
                 if next_choice.title() == "Hit":
-                    hit(player_count)
+                    hit(player_count, player_vs_cpu)
                 elif next_choice.title() == "Stand":
                     pass
         
