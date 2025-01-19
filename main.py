@@ -1,5 +1,7 @@
 import random
 
+cards = ["Face", 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
 def main_menu():
     while True:
         prompt = int(input("""Welcome to Blackjack Elite, presented to you by MiniGame Enterprizes!
@@ -31,7 +33,6 @@ Enter choice here: """))
             print("")
 
 def hit(player_count, current_game_mode):
-    cards = ["Face", 2, 3, 4, 5, 6, 7, 8, 9, 10]
     while True:
         random_index = random.randint(0, len(cards) - 1)
         random_card = cards[random_index]
@@ -69,8 +70,6 @@ def player_vs_cpu():
     computer_count = 0
 
     while True:
-        cards = ["Face", 2, 3, 4, 5, 6, 7, 8, 9, 10]
-
         users_two_cards = input("Press enter to draw your first two cards: ")
         if len(users_two_cards) >= 0:
             random_index = random.randint(0, len(cards) - 1) # Draws first card
