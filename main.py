@@ -96,6 +96,16 @@ def hit(player_count, current_game_mode):
         print("Your total so far is:", player_count)
         if player_count == 21:
             print("You win!! You scored a perfect 21!!")
+            while True:
+                rematach = input("Would you like to have a rematch? Type 'y' for yes, or 'n' for no... ")
+                if rematach.title() == "Y":
+                    current_game_mode()
+                else:
+                    print("")
+                    print("Returning to main menu...")
+                    print("")
+                    main_menu()
+
         elif player_count < 21:
             next_choice = input("""Type "Hit" if you want to continue your turn or "Stand" to pass: """)
             if next_choice.title() == "Hit":
