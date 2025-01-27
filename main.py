@@ -115,7 +115,15 @@ def hit(player_count, current_game_mode):
                 cpu_plays(player_count, current_game_mode)
         else:
             print("You went over 21. You lost!")
-            break
+            while True:
+                rematach = input("Would you like to have a rematch? Type 'y' for yes, or 'n' for no... ")
+                if rematach.title() == "Y":
+                    current_game_mode()
+                else:
+                    print("")
+                    print("Returning to main menu...")
+                    print("")
+                    main_menu()
 
 def player_vs_cpu():
     player_count = 0
