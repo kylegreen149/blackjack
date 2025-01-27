@@ -69,8 +69,8 @@ def cpu_plays(player_count, current_game_mode):
             cpu_count += random_card
             print("The computer's total so far is: ", cpu_count)
             continue
-        else:
-            print("The computer went past 21, and YOU WIN!!")   
+        elif cpu_count > 21:
+            print("The computer went past 21, and YOU WIN!!")
             break
     while True:
         rematach = input("Would you like to have a rematch? Type 'y' for yes, or 'n' for no... ")
