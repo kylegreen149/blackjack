@@ -23,6 +23,7 @@ Enter choice here: """))
             current_game_mode = player_vs_cpu
             player_vs_cpu()
         elif prompt == 2:
+            current_game_mode = player_vs_player
             player_vs_player()
         elif prompt == 3:
             print("Closing Blackjack. Come back soon...")
@@ -32,6 +33,56 @@ Enter choice here: """))
             print("Only enter a number from 1-3")
             print("")
 
+def cpu_plays(player_count, current_game_mode):
+    cpu_count = 0
+    while True:
+        cpus_two_cards = input("Press enter to see the computers first two cards: ")
+        if len(cpus_two_cards) >= 0:
+            random_index = random.randint(0, len(cards) - 1) # Draws first card
+            random_index2 = random.randint(0, len(cards) - 1) # Draws second card
+            random_card = cards[random_index] # Returns first card
+            random_card2 = cards[random_index2] # Returns second card
+
+            if random_card == "Face" and cpu_count < 11:
+                random_card = 11
+            elif random_card2 == "Face" and cpu_count < 11:
+                random_card2 = 11
+            elif random_card2 == "Face" and cpu_count >= 11:
+                random_card2 = 1
+
+        print("The computer drew the following cards:", random_card, random_card2)
+        cpu_count = random_card + random_card2
+        print("The computer's total so far is:", cpu_count)
+        break
+    while True:
+        if cpu_count > player_count and cpu_count <= 21:
+            print("The COMPUTER wins!!")
+            break
+        elif cpu_count <= player_count and cpu_count <= 21:
+            random_index = random.randint(0, len(cards) - 1)
+            random_card = cards[random_index]
+            if random_card == "Face" and cpu_count < 11:
+                random_card = 11
+            elif random_card == "Face" and cpu_count > 11:
+                random_card = 1
+            print("The computer drew:", random_card)
+            cpu_count += random_card
+            print("The computer's total so far is: ", cpu_count)
+            continue
+        else:
+            print("The computer went past 21, and YOU WIN!!")   
+            break
+    while True:
+        rematach = input("Would you like to have a rematch? Type 'y' for yes, or 'n' for no... ")
+        if rematach.title() == "Y":
+            current_game_mode()
+        else:
+            print("")
+            print("Returning to main menu...")
+            print("")
+            main_menu()
+    
+
 def hit(player_count, current_game_mode):
     while True:
         random_index = random.randint(0, len(cards) - 1)
@@ -39,7 +90,7 @@ def hit(player_count, current_game_mode):
         print("You drew the following card:", random_card)
         if random_card == "Face" and player_count < 11:
             random_card = 11
-        elif random_card == "Face" and player_count > 11:
+        elif random_card == "Face" and player_count >= 11:
             random_card = 1
         player_count += random_card
         print("Your total so far is:", player_count)
@@ -51,23 +102,13 @@ def hit(player_count, current_game_mode):
                 hit(player_count, current_game_mode)
                 break
             elif next_choice.title() == "Stand":
-                pass
+                cpu_plays(player_count, current_game_mode)
         else:
             print("You went over 21. You lost!")
             break
-    while True:
-        rematach = input("Would you like to have a rematch? Type 'y' for yes, or 'n' for no... ")
-        if rematach.title() == "Y":
-            current_game_mode()
-        else:
-            print("")
-            print("Returning to main menu...")
-            print("")
-            main_menu()
 
 def player_vs_cpu():
     player_count = 0
-    computer_count = 0
 
     while True:
         users_two_cards = input("Press enter to draw your first two cards: ")
@@ -91,8 +132,8 @@ def player_vs_cpu():
                 if next_choice.title() == "Hit":
                     hit(player_count, player_vs_cpu)
                 elif next_choice.title() == "Stand":
-                    pass
-        
+                    cpu_plays(player_count, player_vs_cpu)
+    # Computer generates card     
 
 def player_vs_player():
     pass
