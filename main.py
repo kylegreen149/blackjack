@@ -16,7 +16,7 @@ Choose a number that corresponds with your game mode choice:
     1) Play Blackjack vs Computer
     2) Play Blackjack vs Player (Pass 'n Play)
     3) Exit Program
-    
+
 Enter choice here: """))
         if prompt == 1:
             current_game_mode = player_vs_cpu
@@ -31,6 +31,17 @@ Enter choice here: """))
             print("")
             print("Only enter a number from 1-3")
             print("")
+
+def rematch(current_game_mode):
+    while True:
+        rematch = input("Would you like to have a rematch? Type 'y' for yes, or 'n' for no... ")
+        if rematch.title() == "Y":
+            current_game_mode()
+        else:
+            print("")
+            print("Returning to main menu...")
+            print("")
+            main_menu()
 
 def cpu_plays(player_count, current_game_mode):
     cpu_count = 0
@@ -71,15 +82,7 @@ def cpu_plays(player_count, current_game_mode):
         elif cpu_count > 21:
             print("The computer went past 21, and YOU WIN!!")
             break
-    while True:
-        rematach = input("Would you like to have a rematch? Type 'y' for yes, or 'n' for no... ")
-        if rematach.title() == "Y":
-            current_game_mode()
-        else:
-            print("")
-            print("Returning to main menu...")
-            print("")
-            main_menu()
+    rematch(current_game_mode)
     
 
 def hit(player_count, current_game_mode):
@@ -95,15 +98,7 @@ def hit(player_count, current_game_mode):
         print("Your total so far is:", player_count)
         if player_count == 21:
             print("You win!! You scored a perfect 21!!")
-            while True:
-                rematach = input("Would you like to have a rematch? Type 'y' for yes, or 'n' for no... ")
-                if rematach.title() == "Y":
-                    current_game_mode()
-                else:
-                    print("")
-                    print("Returning to main menu...")
-                    print("")
-                    main_menu()
+            rematch(current_game_mode)
 
         elif player_count < 21:
             next_choice = input("""Type "Hit" if you want to continue your turn or "Stand" to pass: """)
@@ -114,15 +109,7 @@ def hit(player_count, current_game_mode):
                 cpu_plays(player_count, current_game_mode)
         else:
             print("You went over 21. You lost!")
-            while True:
-                rematach = input("Would you like to have a rematch? Type 'y' for yes, or 'n' for no... ")
-                if rematach.title() == "Y":
-                    current_game_mode()
-                else:
-                    print("")
-                    print("Returning to main menu...")
-                    print("")
-                    main_menu()
+            rematch(current_game_mode)
 
 def player_vs_cpu():
     player_count = 0
