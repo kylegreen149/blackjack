@@ -14,7 +14,7 @@ Here are the rules:
 
 Choose a number that corresponds with your game mode choice:
     1) Play Blackjack vs Computer
-    2) Play Blackjack vs Player (Pass 'n Play)
+    2) Play Blackjack vs Player (Pass 'n Play) (Currently in development)
     3) Exit Program
 
 Enter choice here: """))
